@@ -25,7 +25,7 @@ public class RatingsResource {
     public UserRating getUserRatings(@PathVariable("userId") String userId) {
         UserRating userRating = new UserRating();
         userRating.initData(userId);
-        LOGGER.trace("logging in ratings data service - getting user rating for " + userId);
+        LOGGER.info("logging in ratings data service - getting user rating for " + userId);
         return userRating;
 
     }

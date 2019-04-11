@@ -2,30 +2,54 @@
 <configuration>
 <!--    <property name="LOG_DIR" value="logs"/>-->
 
+    ​
+    <springProperty scope="context" name="springAppName" source="spring.application.name"/>
+    <!-- Example for logging into the build folder of your project -->
+    <property name="LOG_FILE" value="${devLogs}/sb-ms-workshop"/>​
+
+    <property name="CONSOLE_LOG_PATTERN-1"
+              value="%d{dd-MM-yyyy HH:mm:ss.SSS} [${springAppName},%X{X-B3-TraceId:-},%X{X-B3-SpanId:-},%X{X-B3-ParentSpanId:-},"/>
+    <property name="CONSOLE_LOG_PATTERN-2"
+              value="%X{X-Span-Export:-}] ${PID:-} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"/>
+
+
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
-                %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n
+                ${CONSOLE_LOG_PATTERN-1}${CONSOLE_LOG_PATTERN-2}
             </pattern>
         </encoder>
     </appender>
 
     <appender name="SAVE-TO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/log.log</file>
-        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-            <Pattern>
-                %d{dd-MM-yyyy HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
-            </Pattern>
-        </encoder>
-        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <!-- rollover daily & on size-->
-            <maxFileSize>10MB</maxFileSize>
-            <fileNamePattern>
-                ${LOG_PATH}/archived/log_%d{dd-MM-yyyy}_%i.log
-            </fileNamePattern>
-            <maxHistory>10</maxHistory>
-            <totalSizeCap>50MB</totalSizeCap>
+        <file>${LOG_FILE}.json</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.json.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>7</maxHistory>
         </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <timestamp>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "service": "${springAppName:-}",
+                        "trace": "%X{X-B3-TraceId:-}",
+                        "span": "%X{X-B3-SpanId:-}",
+                        "parent": "%X{X-B3-ParentSpanId:-}",
+                        "exportable": "%X{X-Span-Export:-}",
+                        "pid": "${PID:-}",
+                        "thread": "%thread",
+                        "class": "%logger{40}",
+                        "rest": "%message"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
     </appender>
 
     <springProfile name="dev">

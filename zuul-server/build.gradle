@@ -15,18 +15,21 @@ repositories {
 
 ext {
     set('springCloudVersion', 'Greenwich.SR1')
-    set('springCloudSleuthVersion', '2.1.1.RELEASE')
+    set('logstashLogbackEncoderVersion', '5.3')
+    set('starterSleuthVersion', '2.1.1.RELEASE')
 }
 
 dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
+    compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    compile 'net.logstash.logback:logstash-logback-encoder:5.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
-        mavenBom "org.springframework.cloud:spring-cloud-sleuth:${springCloudSleuthVersion}"
+        mavenBom "org.springframework.cloud:spring-cloud-starter-sleuth:${starterSleuthVersion}"
     }
 }

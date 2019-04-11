@@ -16,8 +16,9 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
-		<spring-cloud-sleuth.version>2.1.1.RELEASE</spring-cloud-sleuth.version>
+		<spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+		<starter-sleuth.version>2.1.1.RELEASE</starter-sleuth.version>
+		<logstash-logback-encoder.version>5.3</logstash-logback-encoder.version>
 	</properties>
 
 	<dependencies>
@@ -43,6 +44,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>net.logstash.logback</groupId>
+			<artifactId>logstash-logback-encoder</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-sleuth</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -55,11 +64,10 @@
 				<scope>import</scope>
 			</dependency>
 			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-sleuth</artifactId>
-				<version>${spring-cloud-sleuth.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
+				<groupId>net.logstash.logback</groupId>
+				<artifactId>logstash-logback-encoder</artifactId>
+				<version>${logstash-logback-encoder.version}</version>
+				<scope>compile</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

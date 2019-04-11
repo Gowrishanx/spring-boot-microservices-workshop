@@ -25,9 +25,9 @@ public class MovieResource {
 
     @RequestMapping("/{movieId}")
     public Movie getMovieInfo(@PathVariable("movieId") String movieId) {
-        LOGGER.trace("logging in movie info service before external api call for movie " + movieId);
+        LOGGER.info("logging in movie info service before external api call for movie " + movieId);
         MovieSummary movieSummary = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" +  apiKey, MovieSummary.class);
-        LOGGER.trace("logging in movie info service after external api call for movie " + movieId);
+        LOGGER.info("logging in movie info service after external api call for movie " + movieId);
         return new Movie(movieId, movieSummary.getTitle(), movieSummary.getOverview());
 
     }
