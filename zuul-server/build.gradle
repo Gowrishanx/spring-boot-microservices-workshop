@@ -24,6 +24,8 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
     compile 'org.springframework.cloud:spring-cloud-starter-sleuth'
     compile 'net.logstash.logback:logstash-logback-encoder:5.3'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
