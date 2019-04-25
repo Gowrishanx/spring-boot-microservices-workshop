@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/ratingsdata")
+@RequestMapping("/ratingsData")
 public class RatingsResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RatingsResource.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(RatingsResource.class);
 
-    @RequestMapping("/movies/{movieId}")
-    public Rating getMovieRating(@PathVariable("movieId") String movieId) {
+  @RequestMapping("/movies/{movieId}")
+  public Rating getMovieRating(@PathVariable("movieId") String movieId) {
 
-        LOGGER.trace("logging in ratings data service - getting movie rating for " + movieId);
-        return new Rating(movieId, 4);
-    }
+    LOGGER.trace("logging in ratings data service - getting movie rating for " + movieId);
+    return new Rating(movieId, 4);
+  }
 
-    @RequestMapping("/user/{userId}")
-    public UserRating getUserRatings(@PathVariable("userId") String userId) {
-        UserRating userRating = new UserRating();
-        userRating.initData(userId);
-        LOGGER.info("logging in ratings data service - getting user rating for " + userId);
-        return userRating;
+  @RequestMapping("/user/{userId}")
+  public UserRating getUserRatings(@PathVariable("userId") String userId) {
+    UserRating userRating = new UserRating();
+    userRating.initData(userId);
+    LOGGER.info("logging in ratings data service - getting user rating for " + userId);
+    return userRating;
 
-    }
+  }
 
 }

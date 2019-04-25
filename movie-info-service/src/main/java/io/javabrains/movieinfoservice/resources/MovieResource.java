@@ -15,21 +15,19 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/movies")
 public class MovieResource {
 
-    @Value("${api.key}")
-    private String apiKey;
+  private static final Logger LOGGER = LoggerFactory.getLogger(MovieResource.class);
+  @Value("${api.key}")
+  private String apiKey;
+  @Autowired
+  private RestTemplate restTemplate;
 
-    @Autowired
-    private RestTemplate restTemplate;
+  @RequestMapping("/{movieId}")
+  public Movie getMovieInfo(@PathVariable("movieId") String movieId) {
+    LOGGER.info("logging in movie info service before external api call for movie " + movieId);
+    MovieSummary movieSummary = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" + apiKey, MovieSummary.class);
+    LOGGER.info("logging in movie info service after external api call for movie " + movieId);
+    return new Movie(movieId, movieSummary.getTitle(), movieSummary.getOverview());
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MovieResource.class);
-
-    @RequestMapping("/{movieId}")
-    public Movie getMovieInfo(@PathVariable("movieId") String movieId) {
-        LOGGER.info("logging in movie info service before external api call for movie " + movieId);
-        MovieSummary movieSummary = restTemplate.getForObject("https://api.themoviedb.org/3/movie/" + movieId + "?api_key=" +  apiKey, MovieSummary.class);
-        LOGGER.info("logging in movie info service after external api call for movie " + movieId);
-        return new Movie(movieId, movieSummary.getTitle(), movieSummary.getOverview());
-
-    }
+  }
 
 }
