@@ -3,6 +3,8 @@ package io.javabrains.moviecatalogservice.resources;
 import io.javabrains.moviecatalogservice.models.CatalogItem;
 import io.javabrains.moviecatalogservice.models.Movie;
 import io.javabrains.moviecatalogservice.models.UserRating;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +19,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/catalog")
+@Slf4j
 public class CatalogResource {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(CatalogResource.class);
   @Autowired
   WebClient.Builder webClientBuilder;
   @Autowired
@@ -28,7 +30,7 @@ public class CatalogResource {
   @RequestMapping("/{userId}")
   public List<CatalogItem> getCatalog(@PathVariable("userId") String userId) {
 
-    LOGGER.info("logging in movie catalogue service for userId " + userId);
+    log.info("logging in movie catalogue service for userId " + userId);
 
     UserRating userRating = restTemplate.getForObject("http://ratings-data-service/ratingsData/user/" + userId, UserRating.class);
 
