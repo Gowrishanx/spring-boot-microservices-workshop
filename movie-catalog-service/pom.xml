@@ -19,7 +19,7 @@
         <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
         <starter-sleuth.version>2.1.1.RELEASE</starter-sleuth.version>
         <logstash-logback-encoder.version>5.3</logstash-logback-encoder.version>
-        <lombok.version>1.16.16</lombok.version>
+        <lombok.version>1.18.6</lombok.version>
     </properties>
 
     <dependencies>

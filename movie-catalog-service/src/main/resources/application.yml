@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: movie-catalog-service
+  profiles:
+    active: dev
+
+downstream:
+    service:
+      url:
+        ratings-data-service: http://ratings-data-service/ratingsData/user/
+        movie-info-service: http://movie-info-service/movies/
+server:
+  port: 8081
+
+logging:
+  level:
+    org.springframework.web: TRACE
+
