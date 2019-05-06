@@ -1,0 +1,12 @@
+{
+  "userId" : 1,
+  "ratings" : [
+    {
+    "movieId" : "a",
+    "rating":  "1"},
+    {
+      "movieId" : "a",
+      "rating":  1}
+  ]
+
+}

@@ -1,0 +1,11 @@
+{
+  "request": {
+        "method": "GET",
+        "urlPath": "http://movie-info-service/movies/1"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName" : "movie_info_service_response.json"
+        }
+    }
+}

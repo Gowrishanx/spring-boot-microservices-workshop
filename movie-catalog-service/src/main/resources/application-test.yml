@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: movie-catalog-service-test
+  profiles:
+    active: test
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: 'off'
+  cloud:
+    discovery:
+      enabled: false
+  sleuth:
+    feign:
+      enabled: false
+
+wiremock:
+  port: 8071
+
+
+downstream:
+  service:
+    url:
+      gateway: http://localhost:8071
+      ratingsDataService: /ratings-data-service/ratingsData/user/
+      movieInfoService: /movie-info-service/movies/
+
+
+eureka:
+  client:
+    enabled: false
+

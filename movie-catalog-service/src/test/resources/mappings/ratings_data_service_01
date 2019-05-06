@@ -1,0 +1,11 @@
+{
+  "request": {
+        "method": "GET",
+        "urlPath": "http://ratings-data-service/ratingsData/user/1"
+    },
+    "response": {
+        "status": 200,
+        "bodyFileName" : "ratings_info_service_response.json"
+        }
+    }
+}

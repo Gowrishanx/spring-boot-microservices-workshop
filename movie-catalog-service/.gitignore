@@ -1,5 +1,6 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
+devLogs_IS_UNDEFINED/
 
 ### STS ###
 .apt_generated

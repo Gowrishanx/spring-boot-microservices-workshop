@@ -5,10 +5,12 @@ spring:
     active: dev
 
 downstream:
-    service:
-      url:
-        ratings-data-service: http://ratings-data-service/ratingsData/user/
-        movie-info-service: http://movie-info-service/movies/
+  service:
+    url:
+      gateway: http://
+      ratingsDataService: /ratings-data-service/ratingsData/user/
+      movieInfoService: /movie-info-service/movies/
+
 server:
   port: 8081
 

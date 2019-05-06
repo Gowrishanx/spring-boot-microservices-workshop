@@ -6,9 +6,7 @@ import io.javabrains.moviecatalogservice.models.UserRating;
 import io.javabrains.moviecatalogservice.repository.CatalogRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
